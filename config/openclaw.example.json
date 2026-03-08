@@ -1,0 +1,63 @@
+{
+  "agents": {
+    "defaults": {
+      "models": {
+        "xai/grok-4-1-fast": { "alias": "Grok 4.1 Fast" },
+        "anthropic/claude-sonnet-4-5": { "alias": "Claude Sonnet 4.5" },
+        "openai/gpt-5.2": { "alias": "ChatGPT 5.2" },
+        "google/gemini-3-flash-preview": { "alias": "Gemini 3 Flash Preview" }
+      },
+      "maxConcurrent": 4,
+      "subagents": { "maxConcurrent": 8 }
+    },
+    "list": [
+      {
+        "id": "main",
+        "model": {
+          "primary": "xai/grok-4-1-fast",
+          "fallbacks": ["xai/grok-4-1-fast"]
+        },
+        "subagents": { "allowAgents": ["*"] }
+      },
+      {
+        "id": "ca",
+        "name": "ca",
+        "workspace": "/data/.openclaw/workspace-ca",
+        "agentDir": "/data/.openclaw/agents/ca/agent",
+        "model": "xai/grok-4-1-fast"
+      },
+      {
+        "id": "ea",
+        "name": "ea",
+        "workspace": "/data/.openclaw/workspace-ea",
+        "agentDir": "/data/.openclaw/agents/ea/agent",
+        "model": "xai/grok-4-1-fast",
+        "identity": { "name": "Reshma", "emoji": "📋" }
+      }
+    ]
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "lan",
+    "auth": {
+      "mode": "token",
+      "token": "<YOUR_GATEWAY_TOKEN>"
+    },
+    "controlUi": {
+      "allowInsecureAuth": false,
+      "dangerouslyAllowHostHeaderOriginFallback": false
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "allowFrom": ["+91XXXXXXXXXX"]
+    }
+  },
+  "browser": {
+    "headless": true,
+    "noSandbox": false
+  }
+}

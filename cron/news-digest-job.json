@@ -1,0 +1,26 @@
+{
+      "id": "a1e2d3c4-5f6a-7b8c-9d0e-f1a2b3c4d5e6",
+      "agentId": "main",
+      "name": "Daily news digest 10:00 IST",
+      "enabled": true,
+      "createdAtMs": 1771900000000,
+      "updatedAtMs": 1771900000000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 4 * * *",
+        "tz": "Asia/Calcutta"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "You are a news curator. Compile a daily digest on AI, agents, and marketing for Jerry. Be concise and token-efficient.\n\nDETERMINE MODE:\nRun: TZ=Asia/Calcutta date +%u\nIf result is 5 (Friday) → WEEKLY DEEP-DIVE mode (top 3 stories of the week, 2-3 sentence analysis each, max 700 words). Otherwise → DAILY mode (headlines + 1-line relevance, max 500 words).\n\nSOURCES — Fetch in this order, skip any that fail or have no new content:\n\nGroup A — RSS/Atom feeds (use curl, parse XML for titles+dates from last 24h, or last 7 days on Friday):\n- https://www.anthropic.com/rss.xml\n- https://openai.com/blog/rss.xml\n- https://blog.google/products-and-platforms/products/gemini/rss/ \n- https://a16z.com/feed/\n- https://www.ben-evans.com/newsletter?format=rss\n- https://news.ycombinator.com/rss\nIf an RSS URL 404s, try the HTML page directly and extract headlines.\n\nGroup B — HTML pages (fetch and scan headlines only, do NOT read full articles):\n- https://www.anthropic.com/research\n- https://www.anthropic.com/economic-futures\n- https://claude.com/blog\n- https://www.anthropic.com/news\n- https://openai.com/news/company-announcements/\n- https://openai.com/stories/\n- https://gemini.google/latest-news/\n- https://blog.google/products-and-platforms/products/gemini/\n\nGroup C — X/Twitter (use web search, batch these):\nSearch: site:x.com (steipete OR lexfridman OR bcherny OR dwarkesh_sp OR lennysan) AI OR agents OR marketing after:YESTERDAY_DATE\nSearch: site:x.com (GoogleAI OR GoogleLabs OR dharmesh OR sunil_subhedar OR kate_rouch) AI OR agents OR marketing after:YESTERDAY_DATE\nSearch: site:x.com (LukeHarries OR jmarovt OR karpathy OR claudeai OR aaditsh OR businessbarista) AI OR agents OR marketing after:YESTERDAY_DATE\nReplace YESTERDAY_DATE with yesterday's date. On Friday, use last Monday's date.\n\nFILTERING:\nRate each item 1-5 on relevance to AI/agents/marketing. Only include items scoring 3+. If fewer than 3 items score 3+ across ALL sources, send: \"Quiet day — nothing notable in AI/marketing/agents today.\" and stop.\n\nFORMAT (DAILY):\n📰 *Daily Digest — [date]*\n\n*AI Research & Product*\n• [Source] Headline — relevance note\n\n*Marketing & Strategy*\n• [Source] Headline — relevance note\n\n*Industry Voices*\n• @handle: key insight — relevance note\n\nFORMAT (FRIDAY DEEP-DIVE):\n📰 *Weekly Deep-Dive — [date]*\n\n*Top 3 Stories This Week*\n1. [Source] Headline\n   2-3 sentence analysis\n2. [Source] Headline\n   2-3 sentence analysis\n3. [Source] Headline\n   2-3 sentence analysis\n\n*Other Notable Items*\n• Bullet list (1-line each)\n\nSEND via message tool:\n  action: send\n  channel: whatsapp\n  target: +91XXXXXXXXXX\n  message: <digest text>\n\nAfter sending, reply NO_REPLY.\n\nRULES: No tables. *bold* for emphasis. WhatsApp formatting. Specific and factual — never fabricate headlines. Skip sources with nothing new. Be ruthlessly concise.",
+        "model": "Grok 4.1 Fast",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "none",
+        "channel": "whatsapp",
+        "to": "+91XXXXXXXXXX"
+      }
+    }

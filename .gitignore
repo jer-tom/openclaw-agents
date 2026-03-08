@@ -1,0 +1,41 @@
+# Secrets & credentials
+.env
+*.env
+client_secret*.json
+credentials/
+*-tokens.json
+*-session.json
+whatsapp-pairing.json
+whatsapp-allowFrom.json
+
+# Session data
+*.jsonl
+sessions/
+auth.json
+auth-profiles.json
+
+# Runtime data
+*.csv
+processed-emails.txt
+processing-log.txt
+last-summary-date.txt
+state.json
+tasks.json
+*.pyc
+__pycache__/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE / tools
+.claude/
+.vscode/
+.idea/
+
+# OpenClaw internals
+.openclaw/
+workspace-state.json
+lock.json
+*.bak
+backup/
